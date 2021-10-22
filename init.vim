@@ -61,11 +61,11 @@ let s:plugin_categories += ['semantic_highlighting']
 "let s:plugin_categories += ['markdown']
 "let s:plugin_categories += ['misc']
 "let s:plugin_categories += ['latex']
-let s:plugin_categories += ['disabled']
+"let s:plugin_categories += ['disabled']
 
 let s:set_t_8f_t_8b_options = 0
 let s:colorscheme_use_base16 = 1
-let s:colorscheme = 'vim-monokai-tasty'
+let s:colorscheme = 'spacecamp_lite'
 
 " Set these options to your liking
 let s:faster_redraw = 0      " Faster redraw disables relative line numbers and cursorline
@@ -104,6 +104,7 @@ if index(s:plugin_categories, 'colorschemes') >= 0
   Plug 'patstockwell/vim-monokai-tasty'
   Plug 'morhetz/gruvbox'
   Plug 'jaredgorski/spacecamp'
+  Plug 'tomasiser/vim-code-dark'
 
   " Enable these if desired:
   "Plug 'altercation/vim-colors-solarized'
@@ -126,6 +127,11 @@ endif
 if index(s:plugin_categories, 'basic') >= 0
   if !has('nvim')
     Plug 'drmikehenry/vim-fixkey'          " Permits mapping more classes of characters (e.g. <Alt-?>)
+  endif
+  if has('nvim-0.5')
+    Plug 'Pocco81/AutoSave.nvim'
+    Plug 'phaazon/hop.nvim'              " easy-motion-like pluggin
+    let s:have_hop = 1
   endif
   Plug 'tpope/vim-eunuch'                " Syntactic sugar for some UNIX shell commands
   Plug 'tpope/vim-repeat'                " Remaps . such that plugin maps can use it
@@ -181,8 +187,8 @@ if index(s:plugin_categories, 'filesearch') >= 0
 endif
 
 if index(s:plugin_categories, 'formatting') >= 0
-  Plug 'junegunn/vim-easy-align'         " Text alignment made easy
-  let s:have_easy_align = 1
+  "Plug 'junegunn/vim-easy-align'         " Text alignment made easy
+  "let s:have_easy_align = 1
   "Plug 'tpope/vim-sleuth'                " Detect and set automatic indentation
   Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }  " Trigger code formatting engines
 endif
@@ -309,7 +315,7 @@ if index(s:plugin_categories, 'disabled') >= 0
   "Plug 'psliwka/vim-smoothie'            " Smooth scrolling done right
   "Plug 'justinmk/vim-dirvish' ", { 'on': ['Dirvish'] }
   "Plug 'kristijanhusak/vim-dirvish-git' ", { 'on': ['Dirvish'] }
-  Plug 'mhinz/vim-startify'              " A fancy start screen
+  "Plug 'mhinz/vim-startify'              " A fancy start screen
   "Plug 'dstein64/vim-win'
   "Plug 'nathanaelkane/vim-indent-guides', { 'on': ['IndentGuidesEnable', 'IndentGuidesDisable', 'IndentGuidesToggle'] }
 endif
@@ -723,6 +729,12 @@ if exists('s:have_bbye')
   nnoremap <silent> <leader><Bs> :Bdelete<cr>
 endif
 
+if exists('s:have_hop')
+  nnoremap <silent> <leader>h :HopWord<cr>
+  nnoremap <silent> <leader>j :HopLine<cr>
+  nnoremap <silent> <leader>k :HopChar2<cr>
+endif
+
 if exists('s:have_localvimrc')
   let g:localvimrc_ask = 0
   let g:localvimrc_persistent = 1
@@ -882,7 +894,7 @@ if exists('s:have_nerdtree')
   let g:NERDTreeHijackNetrw = 0
 
   let g:NERDTreeWinPos="left"
-  let g:NERDTreeWinSize=60
+  let g:NERDTreeWinSize=35
 
   let NERDTreeIgnore = ['\.pyc$', '__pycache__', '.swp']
 
@@ -1215,6 +1227,7 @@ endif
 
 if exists('s:have_float_preview')
   let g:float_preview#auto_close = 0
+  "let g:float_preview#docked = 0 " If set to 0, the preview window will be displayed beside the popup menu. defaults to 1
   autocmd InsertLeave * :call float_preview#close()
 endif
 
