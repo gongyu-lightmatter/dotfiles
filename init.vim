@@ -60,7 +60,7 @@ let s:plugin_categories += ['semantic_highlighting']
 "let s:plugin_categories += ['markdown']
 "let s:plugin_categories += ['misc']
 "let s:plugin_categories += ['latex']
-"let s:plugin_categories += ['disabled']
+let s:plugin_categories += ['disabled']
 
 let s:set_t_8f_t_8b_options = 0
 let s:colorscheme_use_base16 = 1
@@ -308,7 +308,7 @@ if index(s:plugin_categories, 'disabled') >= 0
   "Plug 'psliwka/vim-smoothie'            " Smooth scrolling done right
   "Plug 'justinmk/vim-dirvish' ", { 'on': ['Dirvish'] }
   "Plug 'kristijanhusak/vim-dirvish-git' ", { 'on': ['Dirvish'] }
-  "Plug 'mhinz/vim-startify'              " A fancy start screen
+  Plug 'mhinz/vim-startify'              " A fancy start screen
   "Plug 'dstein64/vim-win'
   "Plug 'nathanaelkane/vim-indent-guides', { 'on': ['IndentGuidesEnable', 'IndentGuidesDisable', 'IndentGuidesToggle'] }
 endif
