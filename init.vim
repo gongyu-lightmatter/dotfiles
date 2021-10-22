@@ -12,7 +12,7 @@
 "   See https://github.com/junegunn/vim-plug on how to use vim-plug.
 "
 " * You can alter the list of plugins by editing the 's:plugin_categories' list below. After installation of new
-"   plugins, just restart vim.
+"   plugins, just restart vim and run :PlugInstall
 "
 " * All mentioned plugins will be installed from GitHub. Check their respective pages for functionality and
 "   documentation.
@@ -36,7 +36,8 @@
 " * coc.nvim requires node.js and yarn to be installed.
 "   Some language support (Python, YAML, HTML, CSS, ...?) is being installed as explicit plugins below.
 "   Other languages may require language servers to be installed; see http://langserver.org/.
-"   For example, ccls (https://github.com/MaskRay/ccls) for C++. Install using CMake and add binary to PATH.
+"   For example, ccls (https://github.com/MaskRay/ccls) for C++. Install using CMake and add binary to PATH. Ubuntu has
+"   ccls packages.
 "
 " * nvim: You may have to install the Python 'pynvim' package for some plugins to work correctly.
 "   $ pip install [--user] --upgrade pynvim
@@ -881,7 +882,7 @@ if exists('s:have_nerdtree')
   let g:NERDTreeHijackNetrw = 0
 
   let g:NERDTreeWinPos="left"
-  let g:NERDTreeWinSize=28
+  let g:NERDTreeWinSize=60
 
   let NERDTreeIgnore = ['\.pyc$', '__pycache__', '.swp']
 
@@ -1080,7 +1081,7 @@ EOF
 
   if executable('docker-langserver')
     call luaeval("require'nvim_lsp'.dockerls.setup{}")
-    autocmd Filetype dockerfile setlocal omnifunc=v:lua.vim.lsp.omnifunc 
+    autocmd Filetype dockerfile setlocal omnifunc=v:lua.vim.lsp.omnifunc
   endif
 
   nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<cr>
@@ -1147,7 +1148,7 @@ if exists('s:have_language_client_neovim')
   "    \   using Pkg;
   "    \   import StaticLint;
   "    \   import SymbolServer;
-  "    \   debug = true; 
+  "    \   debug = true;
   "    \   env_path = dirname(Pkg.Types.Context().env.project_file);
   "    \   server = LanguageServer.LanguageServerInstance(stdin, stdout, debug, env_path, "");
   "    \   server.runlinter = true;
