@@ -129,7 +129,8 @@ if index(s:plugin_categories, 'basic') >= 0
     Plug 'drmikehenry/vim-fixkey'          " Permits mapping more classes of characters (e.g. <Alt-?>)
   endif
   if has('nvim-0.5')
-    Plug 'Pocco81/AutoSave.nvim'
+    Plug 'Pocco81/AutoSave.nvim'         " auto save buffer on configurable events
+    let s:have_autosave = 1
     Plug 'phaazon/hop.nvim'              " easy-motion-like pluggin
     let s:have_hop = 1
   endif
@@ -619,10 +620,10 @@ xnoremap >  >gv
 
 " Buffer handling shortcuts
 " - Switch to previous/next buffer
-"nnoremap <leader>[ :bprevious<cr>
-"nnoremap <leader>] :bnext<cr>
-noremap <silent> <A-j> :bprevious<cr>
-noremap <silent> <A-k> :bnext<cr>
+nnoremap <leader>[ :bprevious<cr>
+nnoremap <leader>] :bnext<cr>
+"noremap <silent> <A-j> :bprevious<cr>
+"noremap <silent> <A-k> :bnext<cr>
 
 " - Quick switching to alternate buffer
 nnoremap <silent> \ :b#<cr>
@@ -727,6 +728,31 @@ endif
 if exists('s:have_bbye')
   " Quick buffer deletion with <Space><Backspace> (using vim-bbye)
   nnoremap <silent> <leader><Bs> :Bdelete<cr>
+endif
+
+if exists('s:have_autosave')
+lua << EOF
+local autosave = require("autosave")
+
+autosave.setup(
+    {
+        enabled = true,
+        execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
+        events = {"InsertLeave", "TextChanged", "TextChangedI"},
+        conditions = {
+            exists = true,
+            filename_is_not = {},
+            filetype_is_not = {},
+            modifiable = true
+        },
+        write_all_buffers = false,
+        on_off_commands = true,
+        clean_command_line_interval = 0,
+        debounce_delay = 135
+    }
+)
+EOF
+autocmd VimEnter * :ASOn 
 endif
 
 if exists('s:have_hop')
