@@ -208,6 +208,7 @@ endif
 
 if index(s:plugin_categories, 'development') >= 0
   Plug 'scrooloose/nerdcommenter'        " Commenting code
+  let s:have_nerdcommenter = 1
   Plug 'liuchengxu/vista.vim'
   let s:have_vista = 1
 
@@ -663,8 +664,14 @@ if s:remap_cursor_keys
   " Remap cursor keys for nicer quickfix list handling
   nnoremap <silent> <leader><Up> :cprevious<cr>
   nnoremap <silent> <leader><Down> :cnext<cr>
-  nnoremap <silent> <leader><Left> :cpfile<cr>
-  nnoremap <silent> <leader><Right> :cnfile<cr>
+  nnoremap <silent> <leader><Home> :cpfile<cr>
+  nnoremap <silent> <leader><End> :cnfile<cr>
+
+  " Remap cursor keys for nicer location list handling
+  nnoremap <silent> <M-Up> :lprev<cr>
+  nnoremap <silent> <M-Down> :lnext<cr>
+  nnoremap <silent> <M-Home> :lpfile<cr>
+  nnoremap <silent> <M-End> :lnfile<cr>
 endif
 
 " F1: Cycle through (relative) line numbering modes
@@ -998,6 +1005,11 @@ if exists('s:have_chromatica')
   let g:chromatica#responsive_mode=1
 endif
 
+if exists('s:have_nerdcommenter')
+ "nnoremap <silent> <leader>cw vw:call NERDComment('x', 'sexy')<CR>
+ "would like to get this: https://youtrack.jetbrains.com/issue/VIM-922
+endif
+
 if exists('s:have_vista')
   let g:vista_sidebar_position = "vertical botright"
   let g:vista_sidebar_width = 42
@@ -1216,7 +1228,7 @@ if exists('s:have_language_client_neovim')
   function LC_maps()
     if has_key(g:LanguageClient_serverCommands, &filetype)
       nnoremap <silent> K     :call LanguageClient_textDocument_hover()<cr>
-      nnoremap <silent> <F6>  :call LanguageClient_textDocument_rename()<cr>
+      nnoremap <silent> <leader>R :call LanguageClient_textDocument_rename()<cr>
       nnoremap <silent> <F7>  :call LanguageClient_textDocument_typeDefinition()<cr>
       nnoremap <silent> <F8>  :call LanguageClient_textDocument_definition()<cr>
       nnoremap <silent> <F9>  :call LanguageClient_textDocument_references()<cr>
