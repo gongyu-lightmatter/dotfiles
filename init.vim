@@ -322,6 +322,10 @@ if index(s:plugin_categories, 'disabled') >= 0
   let s:have_startify = 1
   "Plug 'dstein64/vim-win'
   "Plug 'nathanaelkane/vim-indent-guides', { 'on': ['IndentGuidesEnable', 'IndentGuidesDisable', 'IndentGuidesToggle'] }
+  "Plug 'mg979/vim-visual-multi', {'branch': 'master'}   " multi-cursor support
+  "Plug 'TamaMcGlinn/quickfixdd'   " use dd to delete quickfix list item
+  "Plug 'stefandtw/quickfix-reflector.vim'   " enhance working with quickfix/location lists!
+  "Plug 'ilyachur/cmake4vim'               " nice cmake integration
 endif
 
 call plug#end()
