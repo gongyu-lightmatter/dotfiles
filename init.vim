@@ -61,7 +61,7 @@ let s:plugin_categories += ['semantic_highlighting']
 "let s:plugin_categories += ['markdown']
 "let s:plugin_categories += ['misc']
 "let s:plugin_categories += ['latex']
-"let s:plugin_categories += ['disabled']
+let s:plugin_categories += ['disabled']
 
 let s:set_t_8f_t_8b_options = 0
 let s:colorscheme_use_base16 = 1
@@ -142,7 +142,7 @@ if index(s:plugin_categories, 'basic') >= 0
   Plug 'schickling/vim-bufonly', { 'on': ['Bonly', 'BOnly', 'Bufonly'] }  " Close all buffers but the current one
   Plug 'moll/vim-bbye', { 'on': ['Bdelete'] }  " Adds :Bdelete command to close buffer but keep window
   let s:have_bbye = 1
-  Plug 'tpope/vim-obsession', { 'on': ['Obsess'] }  " Easier session handling
+  "Plug 'tpope/vim-obsession', { 'on': ['Obsess'] }  " Easier session handling
 endif
 
 if index(s:plugin_categories, 'textsearch') >= 0
@@ -192,6 +192,7 @@ if index(s:plugin_categories, 'formatting') >= 0
   "let s:have_easy_align = 1
   "Plug 'tpope/vim-sleuth'                " Detect and set automatic indentation
   Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }  " Trigger code formatting engines
+  let s:have_autoformat = 1
 endif
 
 if index(s:plugin_categories, 'version_control') >= 0
@@ -316,7 +317,8 @@ if index(s:plugin_categories, 'disabled') >= 0
   "Plug 'psliwka/vim-smoothie'            " Smooth scrolling done right
   "Plug 'justinmk/vim-dirvish' ", { 'on': ['Dirvish'] }
   "Plug 'kristijanhusak/vim-dirvish-git' ", { 'on': ['Dirvish'] }
-  "Plug 'mhinz/vim-startify'              " A fancy start screen
+  Plug 'mhinz/vim-startify'              " A fancy start screen
+  let s:have_startify = 1
   "Plug 'dstein64/vim-win'
   "Plug 'nathanaelkane/vim-indent-guides', { 'on': ['IndentGuidesEnable', 'IndentGuidesDisable', 'IndentGuidesToggle'] }
 endif
@@ -567,6 +569,9 @@ nnoremap Q <nop>
 " Disable ZZ and ZQ
 nnoremap ZZ <nop>
 nnoremap ZQ <nop>
+
+" Quit Vim 
+nnoremap <leader>x :qa<CR>
 
 " Allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<cr>
@@ -928,6 +933,10 @@ if exists('s:have_nerdtree')
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 endif
 
+if exists('s:have_autoformat')
+  nnoremap <leader>a :Autoformat<cr>
+endif
+
 if exists('s:have_undotree')
   nnoremap <silent> <Leader>u :UndotreeToggle<cr>
   let g:undotree_WindowLayout = 3
@@ -1261,4 +1270,9 @@ if exists('s:have_goyo')
   let g:goyo_width = 120
   autocmd! User GoyoEnter Limelight
   autocmd! User GoyoLeave Limelight!
+endif
+
+if exists('s:have_startify')
+  let g:startify_session_autoload = 1
+  let g:startify_session_persistence = 1 
 endif
