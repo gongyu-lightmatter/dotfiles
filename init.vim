@@ -315,7 +315,7 @@ if index(s:plugin_categories, 'disabled') >= 0
   "if has("unix") || has("macunix")
   "  Plug 'jez/vim-superman'              " Read man pages with vim (vman command)
   "endif
-  "Plug 'psliwka/vim-smoothie'            " Smooth scrolling done right
+  Plug 'psliwka/vim-smoothie'            " Smooth scrolling done right
   "Plug 'justinmk/vim-dirvish' ", { 'on': ['Dirvish'] }
   "Plug 'kristijanhusak/vim-dirvish-git' ", { 'on': ['Dirvish'] }
   Plug 'mhinz/vim-startify'              " A fancy start screen
@@ -325,7 +325,7 @@ if index(s:plugin_categories, 'disabled') >= 0
   "Plug 'mg979/vim-visual-multi', {'branch': 'master'}   " multi-cursor support
   "Plug 'TamaMcGlinn/quickfixdd'   " use dd to delete quickfix list item
   "Plug 'stefandtw/quickfix-reflector.vim'   " enhance working with quickfix/location lists!
-  "Plug 'ilyachur/cmake4vim'               " nice cmake integration
+  Plug 'ilyachur/cmake4vim'               " nice cmake integration with potential to integrate with vim-spector
 endif
 
 call plug#end()
