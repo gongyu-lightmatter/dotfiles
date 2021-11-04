@@ -1317,6 +1317,8 @@ if exists('s:have_minimap')
   let g:minimap_highlight = 'Comment'
 
   nnoremap <leader>m :MinimapToggle<cr>
+  nnoremap <leader>b :let g:minimap_left = 0<cr> \| :MinimapClose<cr> \| :Minimap<cr>
+  nnoremap <leader>z :let g:minimap_left = 1<cr> \| :MinimapClose<cr> \| :Minimap<cr>
 
   autocmd ExitPre * :MinimapClose      " minimap breaks startify session persistence if it is not closed before exit.
 endif
