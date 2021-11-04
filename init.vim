@@ -316,6 +316,7 @@ if index(s:plugin_categories, 'disabled') >= 0
   "  Plug 'jez/vim-superman'              " Read man pages with vim (vman command)
   "endif
   Plug 'psliwka/vim-smoothie'            " Smooth scrolling done right
+  let s:have_vim_smoothie = 1
   "Plug 'justinmk/vim-dirvish' ", { 'on': ['Dirvish'] }
   "Plug 'kristijanhusak/vim-dirvish-git' ", { 'on': ['Dirvish'] }
   Plug 'mhinz/vim-startify'              " A fancy start screen
@@ -326,6 +327,9 @@ if index(s:plugin_categories, 'disabled') >= 0
   "Plug 'TamaMcGlinn/quickfixdd'   " use dd to delete quickfix list item
   "Plug 'stefandtw/quickfix-reflector.vim'   " enhance working with quickfix/location lists!
   Plug 'ilyachur/cmake4vim'               " nice cmake integration with potential to integrate with vim-spector
+  "Plug 'Xuyuanp/scrollbar.nvim'           " scroll bar 
+  Plug 'wfxr/minimap.vim'                 " code minimap window
+  let s:have_minimap = 1
 endif
 
 call plug#end()
@@ -602,11 +606,13 @@ noremap j gj
 noremap k gk
 
 " Scroll 5 lines up and down ('set scroll=5' gets reset as soon as window is resized)
-nnoremap <C-d> 5<C-d>
-nnoremap <C-u> 5<C-u>
+if !exists('s:have_vim_smoothie')
+  nnoremap <C-d> 5<C-d>
+  nnoremap <C-u> 5<C-u>
 
-vnoremap <C-d> 5<C-d>
-vnoremap <C-u> 5<C-u>
+  vnoremap <C-d> 5<C-d>
+  vnoremap <C-u> 5<C-u>
+endif
 
 " Don't store motions with { or } in the jumplist
 nnoremap <silent> } :<C-u>execute "keepjumps norm! " . v:count1 . "}"<cr>
@@ -754,7 +760,7 @@ autosave.setup(
     {
         enabled = true,
         execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-        events = {"InsertLeave", "TextChanged", "TextChangedI"},
+        events = {"InsertLeave", "TextChanged"},
         conditions = {
             exists = true,
             filename_is_not = {},
@@ -876,6 +882,12 @@ if exists('s:have_fzf')
     " Put fzf in a popup
     " (https://github.com/junegunn/fzf.vim/issues/821#issuecomment-581481211)
     let g:fzf_layout = { 'window': { 'width': 0.85, 'height': 0.75, 'highlight': 'Visual' } }
+    " bind keys to scroll the FZF preview more conviently
+    " (https://github.com/junegunn/fzf.vim/issues/358#issuecomment-841665170)
+    let $FZF_DEFAULT_OPTS="--bind ctrl-y:preview-up,ctrl-e:preview-down,
+                          \ctrl-b:preview-page-up,ctrl-f:preview-page-down,
+                          \ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,
+                          \shift-up:preview-top,shift-down:preview-bottom"
   endif
 
   nnoremap <silent> <leader>fh :History<cr>
@@ -950,7 +962,7 @@ endif
 
 if exists('s:have_undotree')
   nnoremap <silent> <Leader>u :UndotreeToggle<cr>
-  let g:undotree_WindowLayout = 3
+  let g:undotree_WindowLayout = 1
 endif
 
 if exists('s:have_indent_line')
@@ -1291,4 +1303,20 @@ endif
 if exists('s:have_startify')
   let g:startify_session_autoload = 1
   let g:startify_session_persistence = 1 
+endif
+
+if exists('s:have_minimap')
+  let g:minimap_width = 10
+  let g:minimap_auto_start = 0
+  let g:minimap_auto_start_win_enter = 0
+  let g:minimap_highlight_range = 1
+  let g:minimap_git_colors = 1
+  let g:minimap_highlight_search = 1
+  let g:minimap_left = 1
+  let g:minimap_base_highlight = 'Normal'
+  let g:minimap_highlight = 'Comment'
+
+  nnoremap <leader>m :MinimapToggle<cr>
+
+  autocmd ExitPre * :MinimapClose      " minimap breaks startify session persistence if it is not closed before exit.
 endif
