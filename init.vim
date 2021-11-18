@@ -779,6 +779,9 @@ autocmd VimEnter * :ASOn
 endif
 
 if exists('s:have_hop')
+lua << EOF
+  require'hop'.setup()
+EOF
   nnoremap <silent> <leader>h :HopWord<cr>
   nnoremap <silent> <leader>j :HopLine<cr>
   nnoremap <silent> <leader>k :HopChar2<cr>
