@@ -1,0 +1,47 @@
+buildType:
+      default: debug
+      choices:
+        Debug:
+          short: Debug
+          long: Emit debug information without optimization
+          buildType: Debug
+          settings:
+            # ENABLE_NIGHTLY_TESTS: Off
+            ENABLE_QUICK_TESTS: On
+            # ENABLE_CODE_COVERAGE: Off
+            # ENABLE_DOCUMENTATION: Off
+            # ENABLE_PYTHON_BINDINGS: Off
+            # ENABLE_CLANG_FORMAT: Off
+            # ENABLE_YAPF: Off
+            # ENABLE_CLANG_TIDY: Off
+            BUILD_ZEUS_EXEC: Off
+            # FETCHCONTENT_SOURCE_DIR_COMPONENT-CONFIG: /home/ubuntu/LM/component-config
+            # FETCHCONTENT_SOURCE_DIR_JUPITER-HEADERS : /workspaces/jupiter-headers
+        DebugWithNightlyOnly:
+          short: DebugWithNightlyOnly
+          long: Enable nightly tests only and emit debug information without optimization
+          buildType: Debug
+          settings:
+            ENABLE_NIGHTLY_TESTS: On
+            ENABLE_QUICK_TESTS: Off
+            ENABLE_CODE_COVERAGE: Off
+        DebugWithNightly:
+          short: DebugWithNightly
+          long: Enable nightly tests and emit debug information without optimization
+          buildType: Debug
+          settings:
+            ENABLE_NIGHTLY_TESTS: On
+            ENABLE_QUICK_TESTS: On
+            ENABLE_CODE_COVERAGE: On
+        Release:
+          short: Release
+          long: Optimize generated code and omit debug information
+          buildType: Release
+        MinSizeRel:
+          short: MinSizeRel
+          long: Optimize for smallest binary size
+          buildType: MinSizeRel
+        RelWithDebInfo:
+          short: RelWithDebInfo
+          long: Perform optimization AND include debug information
+          buildType: RelWithDebInfo
