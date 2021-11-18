@@ -1,5 +1,3 @@
-" Michael's init.vim
-" (https://github.com/kmhofmann/dotfiles)
 " =======================================
 "
 " Installation:
@@ -36,7 +34,8 @@
 " * coc.nvim requires node.js and yarn to be installed.
 "   Some language support (Python, YAML, HTML, CSS, ...?) is being installed as explicit plugins below.
 "   Other languages may require language servers to be installed; see http://langserver.org/.
-"   For example, ccls (https://github.com/MaskRay/ccls) for C++. Install using CMake and add binary to PATH. Ubuntu has
+" 
+" * ccls (https://github.com/MaskRay/ccls) for C++. Install using CMake and add binary to PATH. Ubuntu has
 "   ccls packages.
 "
 " * nvim: You may have to install the Python 'pynvim' package for some plugins to work correctly.
