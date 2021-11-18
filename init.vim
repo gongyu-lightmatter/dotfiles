@@ -40,6 +40,8 @@
 "
 " * nvim: You may have to install the Python 'pynvim' package for some plugins to work correctly.
 "   $ pip install [--user] --upgrade pynvim
+"
+" * minimap: code-minimap is required. Install with `brew install code-minimap`
 
 " Plugin management
 "=======================================
