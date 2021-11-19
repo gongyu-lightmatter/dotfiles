@@ -73,8 +73,8 @@ let s:faster_redraw = 0      " Faster redraw disables relative line numbers and 
 let s:remap_cursor_keys = 1  " Remap cursor keys
 
 " Choose maximum one of these.
-let s:use_nvim_lsp = 0  " Direct Neovim LSP support is very promising, but still a bit new and experimental...
-let s:use_languageclient = 1
+let s:use_nvim_lsp = 1  " Direct Neovim LSP support is very promising, but still a bit new and experimental...
+let s:use_languageclient = 0
 let s:use_coc_nvim = 0
 
 " Disable a few providers -- enable when needed
@@ -229,7 +229,7 @@ if index(s:plugin_categories, 'linting_completion') >= 0 && (v:version >= 800)
   endif
 
   if s:use_nvim_lsp && has('nvim-0.5')
-    Plug 'neovim/nvim-lsp'             " Configurations for the Neovim LSP client
+    Plug 'neovim/nvim-lspconfig'             " Configurations for the Neovim LSP client
     let s:have_nvim_lsp = 1
   endif
 
@@ -665,6 +665,9 @@ nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>norma
 " Shortcuts for tab handling (:tabprevious and :tabnext are already mapped to C-PgUp and C-PgDn)
 "nnoremap <A-n> :tabnew<cr>
 "nnoremap <A-c> :tabclose<cr>
+
+" Use <leader>| to create a vsplit terminal
+nnoremap <leader><Bar> :vsp term://zsh<CR>
 
 if s:remap_cursor_keys
   " Remap cursor keys for faster window switching
@@ -1130,7 +1133,7 @@ if exists('s:have_nvim_lsp') && (s:have_nvim_lsp_installed)
   if executable('ccls')
     "call luaeval("require'nvim_lsp'.ccls.setup{}")
 lua <<EOF
-require'nvim_lsp'.ccls.setup{
+require'lspconfig'.ccls.setup{
   init_options = {
     highlight = {
       lsRanges = true;
@@ -1177,7 +1180,7 @@ EOF
   endif
 
   nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<cr>
-  "nnoremap <silent> <F6>  <cmd>lua vim.lsp.buf.rename()<cr>
+  nnoremap <silent> <leader>R  <cmd>lua vim.lsp.buf.rename()<cr>
   nnoremap <silent> <F7>  <cmd>lua vim.lsp.buf.type_definition()<cr>
   nnoremap <silent> <F8>  <cmd>lua vim.lsp.buf.definition()<cr>
   nnoremap <silent> <F9>  <cmd>lua vim.lsp.buf.references()<cr>
