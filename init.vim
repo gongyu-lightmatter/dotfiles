@@ -328,6 +328,7 @@ if index(s:plugin_categories, 'disabled') >= 0
   "Plug 'TamaMcGlinn/quickfixdd'   " use dd to delete quickfix list item
   "Plug 'stefandtw/quickfix-reflector.vim'   " enhance working with quickfix/location lists!
   Plug 'ilyachur/cmake4vim'               " nice cmake integration with potential to integrate with vim-spector
+  let s:have_cmake4vim = 1
   "Plug 'Xuyuanp/scrollbar.nvim'           " scroll bar 
   Plug 'wfxr/minimap.vim'                 " code minimap window
   let s:have_minimap = 1
@@ -1075,7 +1076,7 @@ if exists('s:have_ale')
   "let g:ale_list_window_size = 80
 
   nmap <leader>d <Plug>(ale_detail)
-  nmap <leader>t <Plug>(ale_toggle)
+  nmap <leader>t :ALEToggle \| :echo "ALELint Toggled"<CR>
   "<Plug>(ale_reset)
 endif
 
@@ -1319,6 +1320,13 @@ endif
 if exists('s:have_startify')
   let g:startify_session_autoload = 1
   let g:startify_session_persistence = 1 
+endif
+
+if exists('s:have_cmake4vim')
+  autocmd VimEnter * :source ~/cmake4vim-kits.vim
+  nnoremap <leader>K :FZFCMakeSelectKit<CR>
+  nnoremap <leader>T :FZFCMakeSelectBuildType<CR>
+  nnoremap <leader>B :CMakeBuild<CR>
 endif
 
 if exists('s:have_minimap')
