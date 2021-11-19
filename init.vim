@@ -1062,9 +1062,21 @@ if exists('s:have_ale')
         \ 'python': ['black', 'isort'],
         \ }
 
+  let g:ale_linters_explicit = 1   " only use linters specified in g:ale_linters 
   let g:ale_open_list = 0
   let g:ale_lint_delay = 500
   let g:ale_disable_lsp = 1
+
+  "let g:ale_lint_on_text_changed = 'never'
+  "let g:ale_lint_on_enter = 0
+  "let g:ale_lint_on_save = 0
+  "let g:ale_lint_on_insert_leave = 0
+  "let g:ale_list_vertical = 1    " open locatoin list or quickfix list in a vertical window; requires g:ale_open_list
+  "let g:ale_list_window_size = 80
+
+  nmap <leader>d <Plug>(ale_detail)
+  nmap <leader>t <Plug>(ale_toggle)
+  "<Plug>(ale_reset)
 endif
 
 if exists('s:have_coc_nvim')

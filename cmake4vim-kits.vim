@@ -10,7 +10,18 @@ let g:cmake_kits = {
             \        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache"
             \    },
             \    "generator": "Ninja"
-            \    }
+            \  },
+            \  "clang": {
+            \    "compilers": {
+            \      "C": "/usr/bin/clang",
+            \      "CXX": "/usr/bin/clang++"
+            \    },
+            \    "cmake_usr_args": {
+            \        "CMAKE_C_COMPILER_LAUNCHER": "ccache",
+            \        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache"
+            \    },
+            \    "generator": "Ninja"
+            \  }
             \  }
 let g:cmake_build_dir = 'build'
 let g:cmake_compile_commands = '1'
