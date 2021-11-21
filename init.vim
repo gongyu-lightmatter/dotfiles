@@ -212,6 +212,8 @@ if index(s:plugin_categories, 'development') >= 0
   let s:have_nerdcommenter = 1
   Plug 'liuchengxu/vista.vim'
   let s:have_vista = 1
+  Plug 'm-pilia/vim-ccls'
+  let s:have_vim_ccls = 1
 
   if has("python") || has("python3")
     Plug 'plytophogy/vim-virtualenv', { 'on': ['VirtualEnvList', 'VirtualEnvActivate', 'VirtualEnvDeactivate'] }  " Improved working with virtualenvs
@@ -1042,6 +1044,19 @@ if exists('s:have_vista')
   nnoremap <silent> <C-\> :Vista!!<cr>
 endif
 
+if exists('s:have_vim_ccls')
+  "let g:ccls_close_on_jump = v:true
+  "let g:ccls_size = 50
+  "let g:ccls_position = 'botright'
+  "let g:ccls_orientation = 'horizontal'
+
+  let g:ccls_float_width = 80
+  let g:ccls_float_height = 20
+
+  nnoremap <leader>C :CclsCallHierarchy -float<CR>
+  nnoremap <leader>E :CclsCalleeHierarchy -float<CR>
+endif
+
 if exists('s:have_vim_lsp_cxx_highlight')
   "let g:lsp_cxx_hl_log_file = '/tmp/vim-lsp-cxx-hl.log'
   "let g:lsp_cxx_hl_verbose_log = 1
@@ -1064,11 +1079,12 @@ if exists('s:have_ale')
         \ 'c': ['clangtidy'],
         \ 'cpp': ['clangtidy'],
         \ 'python': ['black', 'isort'],
+        \ '*': ['trim_whitespace'],
         \ }
 
   let g:ale_linters_explicit = 1   " only use linters specified in g:ale_linters 
   let g:ale_open_list = 0
-  let g:ale_lint_delay = 500
+  let g:ale_lint_delay = 300
   let g:ale_disable_lsp = 1
 
   "let g:ale_lint_on_text_changed = 'never'
@@ -1077,7 +1093,7 @@ if exists('s:have_ale')
   "let g:ale_lint_on_insert_leave = 0
   "let g:ale_list_vertical = 1    " open locatoin list or quickfix list in a vertical window; requires g:ale_open_list
   "let g:ale_list_window_size = 80
-
+  
   nmap <leader>d <Plug>(ale_detail)
   nmap <leader>t :ALEToggle \| :echo "ALELint Toggled"<CR>
   "<Plug>(ale_reset)
