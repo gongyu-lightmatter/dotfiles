@@ -18,7 +18,8 @@ let g:cmake_kits = {
             \    },
             \    "cmake_usr_args": {
             \        "CMAKE_C_COMPILER_LAUNCHER": "ccache",
-            \        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache"
+            \        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
+            \        "BUILD_ZEUS_EXEC": "Off"
             \    },
             \    "generator": "Ninja"
             \  }
