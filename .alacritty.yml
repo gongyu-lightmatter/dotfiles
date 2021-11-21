@@ -431,7 +431,7 @@ shell:
   args:
     - --login
     - -c
-    - source /Users/gongyu/Workspace/python-venvs/env-zeus/bin/activate && source /Users/gongyu/Workspace/useBrewedLLVM
+    - source /Users/gongyu/Workspace/python-venvs/env-zeus/bin/activate && source /Users/gongyu/Workspace/useBrewedLLVM && zsh
 
 # Startup directory
 #
