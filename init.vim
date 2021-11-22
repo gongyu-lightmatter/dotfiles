@@ -182,6 +182,8 @@ if index(s:plugin_categories, 'filesearch') >= 0
     Plug 'junegunn/fzf.vim'
     " optionally, install bat in your OS to have syntax highlighting in FZF preview window
     let s:have_fzf = 1
+    Plug 'wincent/ferret'
+    let s:have_ferret = 1
   endif
   Plug 'tpope/vim-vinegar'
   Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeFind', 'NERDTreeToggle', 'NERDTreeFocus'] }  " Better file explorer
@@ -960,6 +962,10 @@ if exists('s:have_fzf')
     let &clipboard = old_clipboard
     execute 'Rg' selection
   endfunction
+endif
+
+if exists('s:have_ferret')
+  let g:FerretMap = 0   " turn off default key mappings
 endif
 
 if exists('s:have_easy_align')
