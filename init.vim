@@ -180,6 +180,7 @@ if index(s:plugin_categories, 'filesearch') >= 0
   if !has("win32")
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
+    " optionally, install bat in your OS to have syntax highlighting in FZF preview window
     let s:have_fzf = 1
   endif
   Plug 'tpope/vim-vinegar'
@@ -260,6 +261,8 @@ if index(s:plugin_categories, 'linting_completion') >= 0 && (v:version >= 800)
     if !has('nvim')
       Plug 'roxma/nvim-yarp'
       Plug 'roxma/vim-hug-neovim-rpc'
+    else
+      Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }  " tabnine with deoplete for neovim
     endif
     let s:have_deoplete = 1
 
@@ -892,16 +895,30 @@ if exists('s:have_fzf')
     " Put fzf in a popup
     " (https://github.com/junegunn/fzf.vim/issues/821#issuecomment-581481211)
     let g:fzf_layout = { 'window': { 'width': 0.85, 'height': 0.75, 'highlight': 'Visual' } }
+    " CTRL-A CTRL-Q to select all and build quickfix list; :cdo can be used to work on entries in the quickfix list
+    " source: https://github.com/junegunn/fzf.vim/issues/185#issuecomment-322120216
+    function! s:build_quickfix_list(lines)
+      call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+      copen
+      cc
+    endfunction
+
+    let g:fzf_action = {
+          \ 'ctrl-q': function('s:build_quickfix_list'),
+          \ 'ctrl-t': 'tab split',
+          \ 'ctrl-x': 'split',
+          \ 'ctrl-v': 'vsplit' }
     " bind keys to scroll the FZF preview more conviently
     " (https://github.com/junegunn/fzf.vim/issues/358#issuecomment-841665170)
     let $FZF_DEFAULT_OPTS="--bind ctrl-y:preview-up,ctrl-e:preview-down,
                           \ctrl-b:preview-page-up,ctrl-f:preview-page-down,
                           \ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,
-                          \shift-up:preview-top,shift-down:preview-bottom"
+                          \shift-up:preview-top,shift-down:preview-bottom,
+                          \ctrl-a:select-all"
   endif
 
   nnoremap <silent> <leader>fh :History<cr>
-  nnoremap <silent> <leader>fb :Buffers<cr>
+  nnoremap <silent> <leader>fb :BCommits<cr>
   nnoremap <silent> <leader>ff :Files<cr>
   nnoremap <silent> <leader>fl :Lines<cr>
 
@@ -914,14 +931,35 @@ if exists('s:have_fzf')
   nnoremap <silent> <leader>f/ :History/<cr>
   nnoremap <silent> <leader>fg :GFiles?<cr>
 
+  nnoremap <silent> <leader>/ :execute 'Rg ' . input('Rg/')<CR>
+
   nnoremap <silent> <C-h> :History<cr>
   nnoremap <silent> <C-j> :Buffers<cr>
   nnoremap <silent> <C-k> :Files<cr>
   nnoremap <silent> <C-l> :Lines<cr>
   nnoremap <silent> <C-p> :BLines<cr>
 
-  nnoremap <silent> <C-Space> :Buffers<cr>
+  "nnoremap <silent> <C-Space> :Buffers<cr>
   "nnoremap <silent> <C-\> :GFiles?<cr>
+  
+  nnoremap <silent> <leader>S :call SearchWordWithRg()<CR>
+  vnoremap <silent> <leader>S :call SearchVisualSelectionWithRg()<CR>
+
+  function! SearchWordWithRg()
+    execute 'Rg '.expand('<cword>')
+  endfunction
+
+  function! SearchVisualSelectionWithRg() range
+    let old_reg = getreg('"')
+    let old_regtype = getregtype('"')
+    let old_clipboard = &clipboard
+    set clipboard&
+    normal! ""gvy
+    let selection = getreg('"')
+    call setreg('"', old_reg, old_regtype)
+    let &clipboard = old_clipboard
+    execute 'Rg' selection
+  endfunction
 endif
 
 if exists('s:have_easy_align')
