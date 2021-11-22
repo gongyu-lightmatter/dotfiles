@@ -73,8 +73,8 @@ let s:faster_redraw = 0      " Faster redraw disables relative line numbers and 
 let s:remap_cursor_keys = 1  " Remap cursor keys
 
 " Choose maximum one of these.
-let s:use_nvim_lsp = 0  " Direct Neovim LSP support is very promising, but still a bit new and experimental...
-let s:use_languageclient = 1
+let s:use_nvim_lsp = 1  " Direct Neovim LSP support is very promising, but still a bit new and experimental...
+let s:use_languageclient = 0
 let s:use_coc_nvim = 0
 
 " Disable a few providers -- enable when needed
@@ -182,8 +182,8 @@ if index(s:plugin_categories, 'filesearch') >= 0
     Plug 'junegunn/fzf.vim'
     " optionally, install bat in your OS to have syntax highlighting in FZF preview window
     let s:have_fzf = 1
-    "Plug 'wincent/ferret'
-    "let s:have_ferret = 1
+    Plug 'wincent/ferret'
+    let s:have_ferret = 1
   endif
   Plug 'tpope/vim-vinegar'
   Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeFind', 'NERDTreeToggle', 'NERDTreeFocus'] }  " Better file explorer
@@ -215,8 +215,8 @@ if index(s:plugin_categories, 'development') >= 0
   let s:have_nerdcommenter = 1
   Plug 'liuchengxu/vista.vim'
   let s:have_vista = 1
-  "Plug 'm-pilia/vim-ccls'
-  "let s:have_vim_ccls = 1
+  Plug 'm-pilia/vim-ccls'
+  let s:have_vim_ccls = 1
 
   if has("python") || has("python3")
     Plug 'plytophogy/vim-virtualenv', { 'on': ['VirtualEnvList', 'VirtualEnvActivate', 'VirtualEnvDeactivate'] }  " Improved working with virtualenvs
@@ -1189,10 +1189,6 @@ let s:have_nvim_lsp_installed = isdirectory(expand('<sfile>:p:h') . '/plugged/nv
 if exists('s:have_nvim_lsp') && (s:have_nvim_lsp_installed)
   " First, let's check for some common language servers and enable support for them.
   " Feel free to comment out the ones that are not used...
-
-lua << EOF
-vim.lsp.set_log_level("debug")
-EOF
 
   if executable('ccls')
     "call luaeval("require'nvim_lsp'.ccls.setup{}")
