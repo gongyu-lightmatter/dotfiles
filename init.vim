@@ -1187,7 +1187,7 @@ if exists('s:have_coc_nvim')
   endif
 endif
 
-let s:have_nvim_lsp_installed = isdirectory(expand('<sfile>:p:h') . '/plugged/nvim-lsp')
+let s:have_nvim_lsp_installed = isdirectory(expand('<sfile>:p:h') . '/plugged/nvim-lspconfig')
 
 if exists('s:have_nvim_lsp') && (s:have_nvim_lsp_installed)
   " First, let's check for some common language servers and enable support for them.
