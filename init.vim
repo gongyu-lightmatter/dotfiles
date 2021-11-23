@@ -247,13 +247,16 @@ if index(s:plugin_categories, 'linting_completion') >= 0 && (v:version >= 800)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}  " Full Intellisense-style engine implementation, including LSP client
     let s:have_coc_nvim = 1
 
-    if executable('yarn')
-      Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
-      Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-      Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
-      Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
-      Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
-    endif
+    " these do not work for coc.vim; should use :CocInstall instead:
+    " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+    "if executable('yarn')
+      "Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+      "Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+      "Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
+      "Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
+      "Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+      "Plug 'clangd/coc-clangd', {'do': 'yarn install --frozen-lockfile'}
+    "endif
   endif
 
   " Install Deoplete for nvim-lsp and LanguageClient-neovim.
