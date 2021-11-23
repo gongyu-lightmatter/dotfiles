@@ -260,7 +260,7 @@ if index(s:plugin_categories, 'linting_completion') >= 0 && (v:version >= 800)
   endif
 
   " Install Deoplete for nvim-lsp and LanguageClient-neovim.
-  if exists('s:have_nvim_lsp') || exists('s:use_languageclient')
+  if exists('s:have_nvim_lsp') || s:use_languageclient
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " Asynchronous completion framework
     Plug 'Shougo/deoplete-lsp'  " ...and integration of LSP support
     if !has('nvim')
