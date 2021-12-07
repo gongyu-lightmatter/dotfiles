@@ -338,7 +338,10 @@ if index(s:plugin_categories, 'disabled') >= 0
   "Plug 'TamaMcGlinn/quickfixdd'   " use dd to delete quickfix list item
   "Plug 'stefandtw/quickfix-reflector.vim'   " enhance working with quickfix/location lists!
   Plug 'ilyachur/cmake4vim'               " nice cmake integration with potential to integrate with vim-spector
+  Plug 'tpope/vim-dispatch'               " cmake4vim will use vim-dispatch to asynchronously run the build
   let s:have_cmake4vim = 1
+  "Plug 'cdelledonne/vim-cmake'            " hopefully a better cmake plugin than cmake4vim
+  "let s:have_vim_cmake = 1                " this does not seem to work
   "Plug 'Xuyuanp/scrollbar.nvim'           " scroll bar 
   Plug 'wfxr/minimap.vim'                 " code minimap window
   let s:have_minimap = 1
@@ -465,6 +468,7 @@ set mat=2               " How many tenths of a second to blink when matching bra
 set splitbelow          " New horizontal splits open below
 set splitright          " New vertical splits open to the right
 set synmaxcol=300       " Highlight up to 300 columns
+"set guicursor=a:blinkon100 " Make cursor blink
 
 set foldenable          " Enable folding
 set foldmethod=indent   " Fold by indentation
@@ -1393,6 +1397,9 @@ if exists('s:have_cmake4vim')
   nnoremap <leader>K :FZFCMakeSelectKit<CR>
   nnoremap <leader>T :FZFCMakeSelectBuildType<CR>
   nnoremap <leader>B :CMakeBuild<CR>
+endif
+
+if exists('s:have_vim_cmake')
 endif
 
 if exists('s:have_minimap')
