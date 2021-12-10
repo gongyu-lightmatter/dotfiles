@@ -200,6 +200,7 @@ if index(s:plugin_categories, 'formatting') >= 0
 endif
 
 if index(s:plugin_categories, 'version_control') >= 0
+  " delta can be installed to make the diff looks much better: https://github.com/dandavison/delta
   Plug 'airblade/vim-rooter'             " Changes working directory to project root
   let s:have_vim_rooter = 1
   Plug 'tpope/vim-fugitive'              " Git wrapper
@@ -608,7 +609,14 @@ nnoremap c* *Ncgn
 xnoremap * :<C-u>call VisualStarSearchSet('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call VisualStarSearchSet('?')<CR>?<C-R>=@/<CR><CR>
 
-if !exists('s:have_easyclip')
+if exists('s:have_easyclip')
+  " show the Yanks list
+  noremap <leader>I :IPaste<CR>
+
+  nnoremap gm m
+  let g:EasyClipAlwaysMoveCursorToEndOfPaste = 1
+  let g:EasyClipUseSubstituteDefaults = 1
+else " !exists('s:have_easyclip')
   " Paste from yank register with <leader>p/P
   noremap <leader>p "0p
   noremap <leader>P "0P
@@ -682,6 +690,7 @@ nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>norma
 
 " Use <leader>| to create a vsplit terminal
 nnoremap <leader><Bar> :vsp term://zsh<CR>
+nnoremap <leader>_ :sp term://zsh<CR>
 
 if s:remap_cursor_keys
   " Remap cursor keys for faster window switching
@@ -940,13 +949,13 @@ if exists('s:have_fzf')
   nnoremap <silent> <leader>f/ :History/<cr>
   nnoremap <silent> <leader>fg :GFiles?<cr>
 
-  nnoremap <silent> <leader>/ :execute 'Rg ' . input('Rg/')<CR>
+  nnoremap <silent>  <leader>/ :BLines<cr>
+  "nnoremap <silent> <leader>/ :execute 'Rg ' . input('Rg/')<CR>
 
   nnoremap <silent> <C-h> :History<cr>
   nnoremap <silent> <C-j> :Buffers<cr>
   nnoremap <silent> <C-k> :Files<cr>
   nnoremap <silent> <C-l> :Lines<cr>
-  nnoremap <silent> <C-p> :BLines<cr>
 
   "nnoremap <silent> <C-Space> :Buffers<cr>
   "nnoremap <silent> <C-\> :GFiles?<cr>
@@ -1000,7 +1009,7 @@ if exists('s:have_nerdtree')
   endfunction
 
   " Open or focus NERDTree with Ctrl-n, or close it if already focused
-  nnoremap <silent> <C-n> :call FocusOrCloseNERDTree()<cr>
+  "nnoremap <silent> <C-n> :call FocusOrCloseNERDTree()<cr>
   nnoremap <silent> <leader>n :call NTFindOrCloseNERDTree()<cr>
 
   let g:NERDTreeShowHidden=1
@@ -1031,11 +1040,6 @@ if exists('s:have_indent_line')
   nnoremap <silent> <Leader>i :IndentLinesToggle<cr>
   "let g:indentLine_setColors = 0
   "let g:indentLine_char = '┆'
-endif
-
-if exists('s:have_easyclip')
-  nnoremap gm m
-  let g:EasyClipAlwaysMoveCursorToEndOfPaste = 1
 endif
 
 if exists('s:have_splitline')
@@ -1253,6 +1257,8 @@ EOF
   nnoremap <silent> <F9>  <cmd>lua vim.lsp.buf.references()<cr>
   nnoremap <silent> <F10> <cmd>lua vim.lsp.buf.implementation()<cr>
 
+  nnoremap <silent> <leader>G  :sp<cr> \| :lua vim.lsp.buf.definition()<cr>
+
   "inoremap <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : <sid>CheckLastCharIsWhitespace() ? "\<Tab>" : "\<C-x>\<C-o>"
   "inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 
@@ -1336,6 +1342,8 @@ if exists('s:have_language_client_neovim')
       nnoremap <silent> <F8>  :call LanguageClient_textDocument_definition()<cr>
       nnoremap <silent> <F9>  :call LanguageClient_textDocument_references()<cr>
       nnoremap <silent> <F10> :call LanguageClient_textDocument_implementation()<cr>
+
+      "nnoremap <leader>G  :sp<cr> \| :call LanguageClient_textDocument_definition()<cr>
     endif
   endfunction
 
@@ -1394,6 +1402,7 @@ endif
 
 if exists('s:have_cmake4vim')
   autocmd VimEnter * :source ~/cmake4vim-kits.vim
+  autocmd User StartifyReady :FZFCMakeSelectKit
   nnoremap <leader>K :FZFCMakeSelectKit<CR>
   nnoremap <leader>T :FZFCMakeSelectBuildType<CR>
   nnoremap <leader>B :CMakeBuild<CR>
