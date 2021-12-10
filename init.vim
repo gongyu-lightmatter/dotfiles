@@ -209,6 +209,8 @@ if index(s:plugin_categories, 'version_control') >= 0
   Plug 'mhinz/vim-signify'               " Show visual git diff in the gutter
   let s:have_signify = 1
   Plug 'rhysd/git-messenger.vim'
+  " before neovim fix their vimdiff colors here is a workaround to use git-delta to display git diff
+  nnoremap <leader>D :vsp <Bar> terminal git diff -- %<cr>
 endif
 
 if index(s:plugin_categories, 'development') >= 0
@@ -691,6 +693,8 @@ nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>norma
 " Use <leader>| to create a vsplit terminal
 nnoremap <leader><Bar> :vsp term://zsh<CR>
 nnoremap <leader>_ :sp term://zsh<CR>
+" Automatically enter insert mode on the terminal
+autocmd TermOpen * startinsert
 
 if s:remap_cursor_keys
   " Remap cursor keys for faster window switching
@@ -1256,8 +1260,10 @@ EOF
   nnoremap <silent> <F8>  <cmd>lua vim.lsp.buf.definition()<cr>
   nnoremap <silent> <F9>  <cmd>lua vim.lsp.buf.references()<cr>
   nnoremap <silent> <F10> <cmd>lua vim.lsp.buf.implementation()<cr>
+  nnoremap <silent> <leader><Tab> <cmd>lua vim.lsp.buf.signature_help()<cr>
 
-  nnoremap <silent> <leader>G  :sp<cr> \| :lua vim.lsp.buf.definition()<cr>
+  "nnoremap <silent> <leader>G  :sp<cr> \| :lua vim.lsp.buf.definition()<cr>   " this does not work because :sp loses
+  "cursor position
 
   "inoremap <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : <sid>CheckLastCharIsWhitespace() ? "\<Tab>" : "\<C-x>\<C-o>"
   "inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
