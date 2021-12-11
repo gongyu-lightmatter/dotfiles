@@ -220,6 +220,8 @@ if index(s:plugin_categories, 'development') >= 0
   let s:have_vista = 1
   Plug 'm-pilia/vim-ccls'
   let s:have_vim_ccls = 1
+  Plug 'alepez/vim-gtest'
+  let s:have_vim_gtest = 1
 
   if has("python") || has("python3")
     Plug 'plytophogy/vim-virtualenv', { 'on': ['VirtualEnvList', 'VirtualEnvActivate', 'VirtualEnvDeactivate'] }  " Improved working with virtualenvs
@@ -694,7 +696,7 @@ nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>norma
 nnoremap <leader><Bar> :vsp term://zsh<CR>
 nnoremap <leader>_ :sp term://zsh<CR>
 " Automatically enter insert mode on the terminal
-autocmd TermOpen * startinsert
+"autocmd TermOpen * startinsert
 
 if s:remap_cursor_keys
   " Remap cursor keys for faster window switching
@@ -1114,6 +1116,16 @@ if exists('s:have_vim_ccls')
 
   nnoremap <leader>C :CclsCallHierarchy -float<CR>
   nnoremap <leader>E :CclsCalleeHierarchy -float<CR>
+endif
+
+if exists('s:have_vim_gtest')
+  "let g:gtest#gtest_command = "./test"
+  " Nerdtree has a copy path to clipboard command in the system menu and then <C-r>* can be used in nvim command mode
+  " with the next key map to set the executable. source: https://stackoverflow.com/a/906540
+  nnoremap <leader>G :let g:gtest#gtest_command = ""
+  nnoremap <leader>X :FZFGTest<CR>
+  let g:gtest#highlight_failing_tests = 1
+  let g:gtest#print_time = 1
 endif
 
 if exists('s:have_vim_lsp_cxx_highlight')
