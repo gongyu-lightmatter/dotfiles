@@ -211,6 +211,8 @@ if index(s:plugin_categories, 'version_control') >= 0
   Plug 'rhysd/git-messenger.vim'
   " before neovim fix their vimdiff colors here is a workaround to use git-delta to display git diff
   nnoremap <leader>D :vsp <Bar> terminal git diff -- %<cr>
+  " lazygit is very useful
+  nnoremap <leader>L :Start lazygit<CR>
 endif
 
 if index(s:plugin_categories, 'development') >= 0
@@ -350,6 +352,8 @@ if index(s:plugin_categories, 'disabled') >= 0
   "Plug 'Xuyuanp/scrollbar.nvim'           " scroll bar 
   Plug 'wfxr/minimap.vim'                 " code minimap window
   let s:have_minimap = 1
+  "Plug 'puremourning/vimspector'          " Debugger
+  "let s:have_vimspector = 1
 endif
 
 call plug#end()
@@ -1124,6 +1128,7 @@ if exists('s:have_vim_gtest')
   " with the next key map to set the executable. source: https://stackoverflow.com/a/906540
   nnoremap <leader>G :let g:gtest#gtest_command = ""
   nnoremap <leader>X :FZFGTest<CR>
+  nnoremap <leader>U :GTestRunUnderCursor<CR>
   let g:gtest#highlight_failing_tests = 1
   let g:gtest#print_time = 1
 endif
@@ -1424,9 +1429,25 @@ if exists('s:have_cmake4vim')
   nnoremap <leader>K :FZFCMakeSelectKit<CR>
   nnoremap <leader>T :FZFCMakeSelectBuildType<CR>
   nnoremap <leader>B :CMakeBuild<CR>
+
+  let g:cmake_vimspector_support = 1
 endif
 
 if exists('s:have_vim_cmake')
+endif
+
+if exists('s:have_vimspector ')
+let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
+
+" for normal mode - the word under the cursor
+nmap <Leader>ei <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>ei <Plug>VimspectorBalloonEval
+
+nmap <LocalLeader><F11> <Plug>VimspectorUpFrame
+nmap <LocalLeader><F12> <Plug>VimspectorDownFrame
+
 endif
 
 if exists('s:have_minimap')
