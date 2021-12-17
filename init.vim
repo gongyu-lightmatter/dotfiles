@@ -209,10 +209,8 @@ if index(s:plugin_categories, 'version_control') >= 0
   Plug 'mhinz/vim-signify'               " Show visual git diff in the gutter
   let s:have_signify = 1
   Plug 'rhysd/git-messenger.vim'
-  " before neovim fix their vimdiff colors here is a workaround to use git-delta to display git diff
-  nnoremap <leader>D :vsp <Bar> terminal git diff -- %<cr>
-  " lazygit is very useful
-  nnoremap <leader>L :Start lazygit<CR>
+
+  let s:have_git_utils= 1   " lazygit is a tool that is very helpful: https://github.com/jesseduffield/lazygit
 endif
 
 if index(s:plugin_categories, 'development') >= 0
@@ -916,6 +914,13 @@ endif
 if exists('s:have_signify')
   let g:signify_vcs_list = ['git']
   let g:signify_realtime = 1
+endif
+
+if exists('s:have_git_utils')
+  " before neovim fix their vimdiff colors here is a workaround to use git-delta to display git diff
+  nnoremap <leader>D :vsp <Bar> terminal git diff -- %<cr>
+  " lazygit is very useful
+  nnoremap <leader>L :Start lazygit<CR>
 endif
 
 if exists('s:have_fzf')
