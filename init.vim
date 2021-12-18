@@ -350,8 +350,8 @@ if index(s:plugin_categories, 'disabled') >= 0
   "Plug 'Xuyuanp/scrollbar.nvim'           " scroll bar 
   Plug 'wfxr/minimap.vim'                 " code minimap window
   let s:have_minimap = 1
-  "Plug 'puremourning/vimspector'          " Debugger
-  "let s:have_vimspector = 1
+  Plug 'puremourning/vimspector'          " Debugger
+  let s:have_vimspector = 1
 endif
 
 call plug#end()
@@ -727,20 +727,20 @@ noremap <F1> :call CycleThroughLineNumberingModes()<cr>
 noremap <silent> <F2> :call CycleThroughTextWidths()<cr>
 
 " F3: Switch display of unprintable characters
-noremap <F3> :set list!<cr>:set list?<cr>
+noremap <leader><F3> :set list!<cr>:set list?<cr>
 
 " F4: Switch text wrapping
-noremap <F4> :set wrap!<cr>:set wrap?<cr>
+noremap <leader><F4> :set wrap!<cr>:set wrap?<cr>
 
 " F5: Switch paste mode
-noremap <F5> :setlocal paste!<cr>:setlocal paste?<cr>
+noremap <leader><F5> :setlocal paste!<cr>:setlocal paste?<cr>
 
-" F6-F10 mapped by language server client; see below
+" F3-F12 mapped by vimspector HUMAN mode; see below
 
-" F11: usually mapped to 'full screen' by terminal emulator
+" F11: usually mapped to 'full screen' by terminal emulator  " not for kitty
 
-" F12: Source $MYVIMRC
-noremap <silent> <F12> :source $MYVIMRC<cr>:echo "Sourced " . $MYVIMRC . ". (" . strftime('%c'). ")"<cr>
+" F12: Source $MYVIMRC  " comment out because <leader>vv is doing the same thing
+"noremap <silent> <F12> :source $MYVIMRC<cr>:echo "Sourced " . $MYVIMRC . ". (" . strftime('%c'). ")"<cr>
 
 " Shortcut to quickly change/edit $MYVIMRC
 nnoremap <silent> <Leader>vc :edit $MYVIMRC<cr>
@@ -764,8 +764,8 @@ endif
 
 if exists('s:have_grepper')
   " Maps the Grepper operator for normal and visual mode
-  nmap gs <plug>(GrepperOperator)
-  xmap gs <plug>(GrepperOperator)
+  nmap rg <plug>(GrepperOperator)
+  xmap rg <plug>(GrepperOperator)
   let g:grepper = {'tools': ['rg', 'grep', 'git']}
 
   " Fast search within the file (results opening in quickfix list)
@@ -1203,11 +1203,11 @@ if exists('s:have_coc_nvim')
   nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
   " Map function keys for LSP functionality
-  nmap <silent> <F6>  <Plug>(coc-rename)
-  nmap <silent> <F7>  <Plug>(coc-type-definition)
-  nmap <silent> <F8>  <Plug>(coc-definition)
-  nmap <silent> <F9>  <Plug>(coc-references)
-  nmap <silent> <F10> <Plug>(coc-implementation)
+  nmap <silent> <leader>R  <Plug>(coc-rename)
+  nmap <silent> td  <Plug>(coc-type-definition)
+  nmap <silent> gd  <Plug>(coc-definition)
+  nmap <silent> gr  <Plug>(coc-references)
+  nmap <silent> gi <Plug>(coc-implementation)
 
   " Use K to show documentation in preview window
   nnoremap <silent> K :call <sid>show_documentation()<cr>
@@ -1278,11 +1278,11 @@ EOF
 
   nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<cr>
   nnoremap <silent> <leader>R  <cmd>lua vim.lsp.buf.rename()<cr>
-  nnoremap <silent> <F7>  <cmd>lua vim.lsp.buf.type_definition()<cr>
-  nnoremap <silent> <F8>  <cmd>lua vim.lsp.buf.definition()<cr>
-  nnoremap <silent> <F9>  <cmd>lua vim.lsp.buf.references()<cr>
-  nnoremap <silent> <F10> <cmd>lua vim.lsp.buf.implementation()<cr>
-  nnoremap <silent> <leader><Tab> <cmd>lua vim.lsp.buf.signature_help()<cr>
+  nnoremap <silent> td  <cmd>lua vim.lsp.buf.type_definition()<cr>
+  nnoremap <silent> gd  <cmd>lua vim.lsp.buf.definition()<cr>
+  nnoremap <silent> gr  <cmd>lua vim.lsp.buf.references()<cr>
+  nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<cr>
+  nnoremap <silent> gs <cmd>lua vim.lsp.buf.signature_help()<cr>
 
   "nnoremap <silent> <leader>G  :sp<cr> \| :lua vim.lsp.buf.definition()<cr>   " this does not work because :sp loses
   "cursor position
@@ -1366,10 +1366,10 @@ if exists('s:have_language_client_neovim')
     if has_key(g:LanguageClient_serverCommands, &filetype)
       nnoremap <silent> K     :call LanguageClient_textDocument_hover()<cr>
       nnoremap <silent> <leader>R :call LanguageClient_textDocument_rename()<cr>
-      nnoremap <silent> <F7>  :call LanguageClient_textDocument_typeDefinition()<cr>
-      nnoremap <silent> <F8>  :call LanguageClient_textDocument_definition()<cr>
-      nnoremap <silent> <F9>  :call LanguageClient_textDocument_references()<cr>
-      nnoremap <silent> <F10> :call LanguageClient_textDocument_implementation()<cr>
+      nnoremap <silent> td  :call LanguageClient_textDocument_typeDefinition()<cr>
+      nnoremap <silent> gd  :call LanguageClient_textDocument_definition()<cr>
+      nnoremap <silent> gr  :call LanguageClient_textDocument_references()<cr>
+      nnoremap <silent> gi :call LanguageClient_textDocument_implementation()<cr>
 
       "nnoremap <leader>G  :sp<cr> \| :call LanguageClient_textDocument_definition()<cr>
     endif
@@ -1433,6 +1433,7 @@ if exists('s:have_cmake4vim')
   autocmd User StartifyReady :FZFCMakeSelectKit
   nnoremap <leader>K :FZFCMakeSelectKit<CR>
   nnoremap <leader>T :FZFCMakeSelectBuildType<CR>
+  nnoremap <leader>V :FZFCMakeSelectTarget<CR>
   nnoremap <leader>B :CMakeBuild<CR>
 
   let g:cmake_vimspector_support = 1
