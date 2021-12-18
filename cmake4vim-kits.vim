@@ -9,6 +9,7 @@ let g:cmake_kits = {
             \        "CMAKE_C_COMPILER_LAUNCHER": "ccache",
             \        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
             \        "BUILD_ZEUS_EXEC": "Off",
+            \        "FETCHCONTENT_SOURCE_DIR_ZEUS": "/workspaces/zeus"
             \    },
             \    "generator": "Ninja"
             \  },
@@ -20,7 +21,7 @@ let g:cmake_kits = {
             \    "cmake_usr_args": {
             \        "CMAKE_C_COMPILER_LAUNCHER": "ccache",
             \        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
-            \        "BUILD_ZEUS_EXEC": "Off",
+            \        "BUILD_ZEUS_EXEC": "Off"
             \    },
             \    "generator": "Ninja"
             \  }
