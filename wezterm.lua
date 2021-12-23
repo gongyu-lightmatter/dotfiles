@@ -6,6 +6,9 @@ return {
       args = {"top"},
     },
     {
+      args = {"source", "/Users/gongyu/Workspace/python-venvs/env-zeus/bin/activate", ";", "nvim"},
+    },
+    {
       -- Optional label to show in the launcher. If omitted, a label
       -- is derived from the `args`
       label = "GitHub Codespace",
