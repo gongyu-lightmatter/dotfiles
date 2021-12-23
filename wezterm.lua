@@ -8,11 +8,10 @@ return {
     {
       -- Optional label to show in the launcher. If omitted, a label
       -- is derived from the `args`
-      --label = "GitHub Codespace",
+      label = "GitHub Codespace",
       -- The argument array to spawn.  If omitted the default program
       -- will be used as described in the documentation above
-      --args = {"gh", "cs", "ssh", "-c", "gongyu-lightmatter-lightmatter-ai-zeus-jxwvvj99fq76p", "--", "tmux", "new", "-A", "-s", "zeus"},
-      --args = {"gh", "cs", "ssh", "-c", "gongyu-lightmatter-lightmatter-ai-zeus-jxwvvj99fq76p"}, -- this does not work for some reason
+      args = {"gh", "cs", "ssh", "-c", "gongyu-lightmatter-lightmatter-ai-zeus-jxwvvj99fq76p", "--", "-t", "tmux", "new", "-A", "-s", "zeus"},
 
       -- You can specify an alternative current working directory;
       -- if you don't specify one then a default based on the OSC 7
