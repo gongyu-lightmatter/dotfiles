@@ -47,7 +47,8 @@
 "=======================================
 
 " Activate or deactivate categories here:
-let s:plugin_categories  = ['colorschemes']
+let s:plugin_categories = []
+"let s:plugin_categories += ['colorschemes']
 let s:plugin_categories += ['basic']
 let s:plugin_categories += ['textsearch']
 let s:plugin_categories += ['textediting']
