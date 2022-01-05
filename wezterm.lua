@@ -99,7 +99,7 @@ return {
 
   window_background_opacity = 1.0,
 
-  window_background_image = "/Users/gongyu/Pictures/jinx3.jpg",
+  window_background_image = "/Users/gongyu/Pictures/jinx2.jpg",
 
   window_background_image_hsb = {
     -- Darken the background image by reducing it to 1/3rd
