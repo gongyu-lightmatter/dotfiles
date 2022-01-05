@@ -47,7 +47,8 @@
 "=======================================
 
 " Activate or deactivate categories here:
-let s:plugin_categories  = ['colorschemes']
+let s:plugin_categories = []
+"let s:plugin_categories += ['colorschemes']
 let s:plugin_categories += ['basic']
 let s:plugin_categories += ['textsearch']
 let s:plugin_categories += ['textediting']
@@ -239,6 +240,8 @@ if index(s:plugin_categories, 'linting_completion') >= 0 && (v:version >= 800)
   endif
 
   if s:use_nvim_lsp && has('nvim-0.5')
+    Plug 'mickael-menu/zk-nvim'              " Plugin that works with zk which also requires nvim_lsp
+    let s:have_zk_nvim = 1
     Plug 'neovim/nvim-lspconfig'             " Configurations for the Neovim LSP client
     let s:have_nvim_lsp = 1
   endif
@@ -997,6 +1000,12 @@ endif
 
 if exists('s:have_ferret')
   let g:FerretMap = 0   " turn off default key mappings
+
+  function! SearchWholeWordWithAck()
+    execute 'Ack -w '.expand('<cword>')
+  endfunction
+  
+  nmap <leader>W :call SearchWholeWordWithAck()<CR>
 endif
 
 if exists('s:have_easy_align')
@@ -1409,6 +1418,27 @@ if exists('s:have_deoplete')
 
   " Shortcut to disable Deoplete
   nnoremap Q :call CheckDeopleteStatus()<cr>
+endif
+
+if exists('s:have_zk_nvim')
+lua << EOF
+require'zk'.setup({
+  create_user_commands = true,
+
+  lsp = {
+    config = {
+      cmd = { "zk", "lsp" },
+      name = "zk",
+      },
+
+    auto_attach = {
+    enabled = true,
+    filetypes = { "markdown" },
+    },
+  },
+})
+EOF
+
 endif
 
 if exists('s:have_float_preview')
