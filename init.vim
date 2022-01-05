@@ -1000,6 +1000,12 @@ endif
 
 if exists('s:have_ferret')
   let g:FerretMap = 0   " turn off default key mappings
+
+  function! SearchWholeWordWithAck()
+    execute 'Ack -w '.expand('<cword>')
+  endfunction
+  
+  nmap <leader>W :call SearchWholeWordWithAck()<CR>
 endif
 
 if exists('s:have_easy_align')
