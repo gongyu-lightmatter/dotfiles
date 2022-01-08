@@ -1,3 +1,4 @@
+# ~/.config/lazygit/config.yml
 os:
   editCommand: 'nvim'
   editCommandTemplate: '{{editor}} +{{line}} {{filename}}'
