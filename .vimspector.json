@@ -1,0 +1,23 @@
+{
+  "configurations": {
+    "RunQuickTests": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "request": "launch",
+        "stopOnEntry#json": "${stopOnEntry:false}",
+        "MIMode": "gdb",
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+        "cwd": "${workspaceRoot}",
+        "externalConsole": true,
+        "program": "/workspaces/zeus/build/test/quick/RunQuickTests",
+        "args": ["--gtest_filter=${ctest}"]
+      }
+    }
+  }
+}
