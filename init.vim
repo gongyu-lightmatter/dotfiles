@@ -48,7 +48,7 @@
 
 " Activate or deactivate categories here:
 let s:plugin_categories = []
-"let s:plugin_categories += ['colorschemes']
+let s:plugin_categories += ['colorschemes']
 let s:plugin_categories += ['basic']
 let s:plugin_categories += ['textsearch']
 let s:plugin_categories += ['textediting']
@@ -703,6 +703,9 @@ nnoremap <leader>_ :sp term://zsh<CR>
 " Automatically enter insert mode on the terminal
 "autocmd TermOpen * startinsert
 
+" Open quickfix window in a split
+nnoremap <leader>Q :vert copen<CR> <Bar> <C-w>=<CR>
+
 if s:remap_cursor_keys
   " Remap cursor keys for faster window switching
   nnoremap <silent> <Up> <C-w>k
@@ -1292,6 +1295,10 @@ EOF
   nnoremap <silent> gr  <cmd>lua vim.lsp.buf.references()<cr>
   nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<cr>
   nnoremap <silent> gs <cmd>lua vim.lsp.buf.signature_help()<cr>
+  vnoremap <silent> ge <cmd>lua vim.lsp.buf.range_code_action()<cr>
+  "vnoremap <silent> gl <cmd>lua vim.lsp.buf.range_code_action()<cr>
+  "vnoremap <silent> gw <cmd>lua vim.lsp.buf.range_code_action()<cr>
+  nnoremap <silent> gc :lua vim.lsp.buf.code_action()<CR>
 
   "nnoremap <silent> <leader>G  :sp<cr> \| :lua vim.lsp.buf.definition()<cr>   " this does not work because :sp loses
   "cursor position
