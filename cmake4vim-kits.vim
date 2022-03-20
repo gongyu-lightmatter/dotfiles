@@ -10,7 +10,6 @@ let g:cmake_kits = {
             \        "CMAKE_C_COMPILER_LAUNCHER": "ccache",
             \        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
             \        "BUILD_ZEUS_EXEC": "Off",
-            \        "FETCHCONTENT_SOURCE_DIR_ZEUS": "/workspaces/zeus"
             \    },
             \    "generator": "Ninja"
             \  },
@@ -50,3 +49,9 @@ let g:cmake_compile_commands_link = './'
             " \      "LDFLAGS": "-L/usr/local/opt/llvm@11/lib -Wl,-rpath,/usr/local/opt/llvm@11/lib",
             " \      "CPPFLAGS": "-I/usr/local/opt/llvm@11/include"
             " \    },
+            "\    "cmake_usr_args": {
+            "\        "CMAKE_C_COMPILER_LAUNCHER": "ccache",
+            "\        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
+            "\        "BUILD_ZEUS_EXEC": "Off",
+            "\        "FETCHCONTENT_SOURCE_DIR_ZEUS": "/workspaces/zeus"
+            "\    },
