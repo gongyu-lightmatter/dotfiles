@@ -240,8 +240,8 @@ if index(s:plugin_categories, 'linting_completion') >= 0 && (v:version >= 800)
   endif
 
   if s:use_nvim_lsp && has('nvim-0.5')
-    Plug 'mickael-menu/zk-nvim'              " Plugin that works with zk which also requires nvim_lsp
-    let s:have_zk_nvim = 1
+    " Plug 'mickael-menu/zk-nvim'              " Plugin that works with zk which also requires nvim_lsp
+    " let s:have_zk_nvim = 1
     Plug 'neovim/nvim-lspconfig'             " Configurations for the Neovim LSP client
     let s:have_nvim_lsp = 1
   endif
