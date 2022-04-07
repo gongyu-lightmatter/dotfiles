@@ -67,7 +67,7 @@ let s:plugin_categories += ['disabled']
 
 let s:set_t_8f_t_8b_options = 0
 let s:colorscheme_use_base16 = 1
-let s:colorscheme = 'codedark' " base16-dracula, codedark, koehler, gruvbox
+let s:colorscheme = 'codedark' " base16-dracula, codedark, koehler, gruvbox, morning, base16-gruvbox-light-soft
 
 " Set these options to your liking
 let s:faster_redraw = 0      " Faster redraw disables relative line numbers and cursorline
@@ -1481,7 +1481,7 @@ endif
 
 if exists('s:have_vimspector ')
 let g:vimspector_enable_mappings = 'HUMAN'
-let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
+let g:vimspector_install_gadgets = [ 'CodeLLDB', 'vscode-cpptools' ]
 
 " for normal mode - the word under the cursor
 nmap <Leader>ei <Plug>VimspectorBalloonEval
