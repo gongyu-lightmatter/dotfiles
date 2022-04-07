@@ -1,7 +1,14 @@
 {
   "configurations": {
     "RunQuickTests": {
-      "adapter": "vscode-cpptools",
+      // CodeLLDB works better with catch throw
+      "adapter": "CodeLLDB",
+      "breakpoints": {
+        "exception": {
+          "cpp_throw": "",
+          "cpp_catch": ""
+        }
+      },
       "configuration": {
         "request": "launch",
         "stopOnEntry#json": "${stopOnEntry:false}",
@@ -15,7 +22,7 @@
         ],
         "cwd": "${workspaceRoot}",
         "externalConsole": true,
-        "program": "/workspaces/zeus/build/test/quick/RunQuickTests",
+        "program": "${workspaceRoot}/build/test/quick/RunQuickTests",
         "args": ["--gtest_filter=${ctest}"]
       }
     }
