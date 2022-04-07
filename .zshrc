@@ -75,7 +75,7 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(autojump common-aliases copybuffer copydir copyfile git ripgrep rsync vi-mode 
+plugins=(autojump common-aliases copybuffer copypath copyfile git ripgrep rsync vi-mode 
          vscode)
 
 source $ZSH/oh-my-zsh.sh
@@ -105,6 +105,7 @@ fi
 # Example aliases
 alias zshconfig="${EDITOR} ~/.zshrc"
 alias ohmyzsh="${EDITOR} ~/.oh-my-zsh"
+alias bat="/usr/bin/batcat"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
