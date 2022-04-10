@@ -186,7 +186,7 @@ if index(s:plugin_categories, 'filesearch') >= 0
     Plug 'wincent/ferret'
     let s:have_ferret = 1
   endif
-  Plug 'tpope/vim-vinegar'
+  " Plug 'tpope/vim-vinegar'  " netrw enhancement
   Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeFind', 'NERDTreeToggle', 'NERDTreeFocus'] }  " Better file explorer
   Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTree', 'NERDTreeFind', 'NERDTreeToggle', 'NERDTreeFocus'] }
   let s:have_nerdtree = 1
@@ -821,11 +821,11 @@ endif
 
 if exists('s:have_hop')
 lua << EOF
-  require'hop'.setup()
+require'hop'.setup({multi_windows = true})
 EOF
   nnoremap <silent> <leader>h :HopWord<cr>
   nnoremap <silent> <leader>j :HopLine<cr>
-  nnoremap <silent> <leader>k :HopChar2<cr>
+  nnoremap <silent> <leader>k :HopChar1<cr>
 endif
 
 if exists('s:have_localvimrc')
