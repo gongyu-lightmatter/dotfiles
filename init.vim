@@ -824,8 +824,11 @@ lua << EOF
 require'hop'.setup({multi_windows = true})
 EOF
   nnoremap <silent> <leader>h :HopWord<cr>
+  vnoremap <silent> <leader>h <cmd>HopWord<cr>
   nnoremap <silent> <leader>j :HopLine<cr>
+  vnoremap <silent> <leader>j <cmd>HopLine<cr>
   nnoremap <silent> <leader>k :HopChar1<cr>
+  vnoremap <silent> <leader>k <cmd>HopChar1<cr>
 endif
 
 if exists('s:have_localvimrc')
