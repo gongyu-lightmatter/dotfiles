@@ -1,7 +1,7 @@
 " :source {this file} to have the settings loaded and then :CMakeSelectKit clang-10 should work
 " todo: try out tool_chain_file for configuring various compilers
 let g:cmake_kits = {
-            \  "clang": {
+            \  "zeus_clang": {
             \    "compilers": {
             \      "C": "/usr/bin/clang",
             \      "CXX": "/usr/bin/clang++"
@@ -13,7 +13,19 @@ let g:cmake_kits = {
             \    },
             \    "generator": "Ninja"
             \  },
-            \  "zeus_clang-11": {
+            \  "zeus_clang-13": {
+            \    "compilers": {
+            \      "C": "/usr/bin/clang-13",
+            \      "CXX": "/usr/bin/clang++-13"
+            \    },
+            \    "cmake_usr_args": {
+            \        "CMAKE_C_COMPILER_LAUNCHER": "ccache",
+            \        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
+            \        "BUILD_ZEUS_EXEC": "Off",
+            \    },
+            \    "generator": "Ninja"
+            \  },
+            \  "zeus_clang-11_macOS": {
             \    "compilers": {
             \      "C": "/usr/local/opt/llvm@11/bin/clang",
             \      "CXX": "/usr/local/opt/llvm@11/bin/clang++"
@@ -25,7 +37,7 @@ let g:cmake_kits = {
             \    },
             \    "generator": "Ninja"
             \  },
-            \  "clang-13": {
+            \  "zeus_clang-13_macOS": {
             \    "compilers": {
             \      "C": "/usr/local/opt/llvm/bin/clang",
             \      "CXX": "/usr/local/opt/llvm/bin/clang++"
