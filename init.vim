@@ -1260,7 +1260,7 @@ EOF
   endif
 
   if executable('pyls')
-    call luaeval("require'nvim_lsp'.pyls.setup{}")
+    call luaeval("require'lspconfig'.pylsp.setup{}")
     autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
   endif
 
