@@ -704,7 +704,7 @@ nnoremap <leader>_ :sp term://zsh<CR>
 "autocmd TermOpen * startinsert
 
 " Open quickfix window in a split
-nnoremap <leader>Q :vert copen<CR> <Bar> <C-w>=<CR>
+nnoremap <leader>Q :cclose <Bar> vert copen<CR> <Bar> <C-w>=<CR>
 
 if s:remap_cursor_keys
   " Remap cursor keys for faster window switching
