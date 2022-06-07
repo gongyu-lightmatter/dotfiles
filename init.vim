@@ -950,6 +950,9 @@ if exists('s:have_fzf')
           \ 'ctrl-t': 'tab split',
           \ 'ctrl-x': 'split',
           \ 'ctrl-v': 'vsplit' }
+
+    let g:fzf_history_dir = '~/.local/share/fzf-history'
+
     " bind keys to scroll the FZF preview more conviently
     " (https://github.com/junegunn/fzf.vim/issues/358#issuecomment-841665170)
     let $FZF_DEFAULT_OPTS="--bind ctrl-y:preview-up,ctrl-e:preview-down,
