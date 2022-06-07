@@ -145,6 +145,8 @@ if index(s:plugin_categories, 'basic') >= 0
   Plug 'moll/vim-bbye', { 'on': ['Bdelete'] }  " Adds :Bdelete command to close buffer but keep window
   let s:have_bbye = 1
   "Plug 'tpope/vim-obsession', { 'on': ['Obsess'] }  " Easier session handling
+  Plug 'danilamihailov/beacon.nvim'
+  let s:have_beacon = 1
 endif
 
 if index(s:plugin_categories, 'textsearch') >= 0
@@ -792,6 +794,16 @@ endif
 if exists('s:have_bbye')
   " Quick buffer deletion with <Space><Backspace> (using vim-bbye)
   nnoremap <silent> <leader><Bs> :Bdelete<cr>
+endif
+
+if exists('s:have_beacon')
+  let g:beacon_enable = 1
+  let g:beacon_fade = 1
+  let g:beacon_size = 80
+  let g:beacon_show_jumps = 1
+  highlight Beacon guibg=blue ctermbg=15
+  let g:beacon_minimal_jump = 5
+  let g:beacon_timeout = 1000
 endif
 
 if exists('s:have_autosave')
