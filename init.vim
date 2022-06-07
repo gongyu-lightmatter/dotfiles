@@ -720,10 +720,10 @@ if s:remap_cursor_keys
   nnoremap <silent> <leader><End> :cnfile<cr>
 
   " Remap cursor keys for nicer location list handling
-  nnoremap <silent> <M-Up> :lprev<cr>
-  nnoremap <silent> <M-Down> :lnext<cr>
-  nnoremap <silent> <M-Home> :lpfile<cr>
-  nnoremap <silent> <M-End> :lnfile<cr>
+  nnoremap <silent> <A-Up> :lprev<cr>
+  nnoremap <silent> <A-Down> :lnext<cr>
+  nnoremap <silent> <A-Home> :lpfile<cr>
+  nnoremap <silent> <A-End> :lnfile<cr>
 endif
 
 " F1: Cycle through (relative) line numbering modes
